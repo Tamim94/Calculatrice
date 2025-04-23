@@ -75,3 +75,20 @@ python main.py multiplication 6 7
 python main.py division 20 5
 # Résultat: 4.0
 ```
+
+# Workflow CI/CD (GitHub Actions)
+Ce projet utilise GitHub Actions pour l'intégration et la vérification continues. Le workflow est défini dans .github/workflows/python-tests.yml.  
+Déclencheurs : Le workflow s'exécute à chaque push ou pull_request sur la branche master.
+Job test :
+Configure l'environnement Python.
+Installe les dépendances (si requirements.txt existe).
+Effectue le linting du code avec flake8.
+Exécute les tests unitaires (unittest discover).
+Calcule la couverture de test (coverage).
+Teste la fonctionnalité de base via l'interface en ligne de commande (main.py).
+Job deploy (Vérification du déploiement) :
+S'exécute uniquement après le succès du job test et sur un push vers la branche master.
+Configure l'environnement Python et installe les dépendances.
+Effectue une vérification supplémentaire de la fonctionnalité de l'application en exécutant des commandes CLI spécifiques.
+Génère un résumé de la vérification dans le rapport du workflow GitHub Actions.
+Le badge en haut de ce README indique l'état actuel du workflow sur la branche master.
