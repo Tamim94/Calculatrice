@@ -28,7 +28,7 @@ calculator/
 Installation
 Cloner ce dépôt :
 
-git clone https://github.com/votre-utilisateur/calculatrice-cli.git
+git clone https://github.com/Tamim94/calculatrice-cli.git
 cd calculatrice-cli
 
 (Optionnel) Créer et activer un environnement virtuel :
