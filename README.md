@@ -38,9 +38,13 @@ cd calculatrice-cli
 (Optionnel) Créer et activer un environnement virtuel :
 ```plaintext
 python -m venv venv
+```
 # Sur Windows:
+```plaintext
 venv\Scripts\activate
+```
 # Sur macOS/Linux:
+```plaintext
 source venv/bin/activate
 ```
 Utilisation
