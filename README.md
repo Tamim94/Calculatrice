@@ -1,3 +1,6 @@
+### Trello
+https://trello.com/invite/b/6808a4fcd356f64015eea791/ATTI7c9ea6917b8b5e9f72b8033676076e41817B07D7/devopsboardgroupe12
+
 ### Calculatrice en Ligne de Commande
 Un projet Python simple qui implémente une calculatrice avec interface en ligne de commande permettant d'effectuer des opérations mathématiques de base.
 
