@@ -1,15 +1,15 @@
-###Calculatrice en Ligne de Commande
+### Calculatrice en Ligne de Commande
 Un projet Python simple qui implémente une calculatrice avec interface en ligne de commande permettant d'effectuer des opérations mathématiques de base.
 
-###Fonctionnalités
+### Fonctionnalités
 Addition de deux nombres
 Soustraction de deux nombres
 Multiplication de deux nombres
 Division de deux nombres (avec gestion de la division par zéro)
 Interface en ligne de commande intuitive
-###Prérequis
+### Prérequis
 Python 3.6 ou version ultérieure
-###Structure du Projet
+### Structure du Projet
 ```plaintext
 calculator/
 │
@@ -47,17 +47,23 @@ Le premier nombre
 Le deuxième nombre
 Exemples
 # Addition
+```plaintext
 python main.py addition 5 3
 # Résultat: 8.0
-
+```
 # Soustraction
+```plaintext
 python main.py soustraction 10 4
 # Résultat: 6.0
-
+```
 # Multiplication
+```plaintext
 python main.py multiplication 6 7
 # Résultat: 42.0
+```
 
 # Division
+```plaintext
 python main.py division 20 5
 # Résultat: 4.0
+```
