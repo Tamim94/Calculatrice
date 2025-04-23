@@ -46,23 +46,23 @@ Le nom de l'opération : addition, soustraction, multiplication ou division
 Le premier nombre
 Le deuxième nombre
 Exemples
-# Addition
+### Addition
 ```plaintext
 python main.py addition 5 3
 # Résultat: 8.0
 ```
-# Soustraction
+### Soustraction
 ```plaintext
 python main.py soustraction 10 4
 # Résultat: 6.0
 ```
-# Multiplication
+### Multiplication
 ```plaintext
 python main.py multiplication 6 7
 # Résultat: 42.0
 ```
 
-# Division
+### Division
 ```plaintext
 python main.py division 20 5
 # Résultat: 4.0
