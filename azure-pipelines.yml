@@ -1,0 +1,95 @@
+trigger:
+  - master  # ou votre branche principale
+
+pool:
+  vmImage: 'ubuntu-latest'  # vous pouvez aussi utiliser 'windows-latest'
+
+variables:
+  - name: pythonVersion
+    value: '3.9'  # ajustez selon votre version Python préférée
+
+stages:
+  - stage: Test
+    displayName: 'Test & Validation'
+    jobs:
+      - job: TestJob
+        displayName: 'Run Tests'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+            displayName: 'Set Python Version'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+              pip install pytest pytest-cov
+            displayName: 'Install dependencies'
+
+          - script: |
+              pytest --cov=calculator tests/ --cov-report=xml
+            displayName: 'Run tests with coverage'
+
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
+            displayName: 'Publish coverage report'
+
+  - stage: Build
+    dependsOn: Test
+    displayName: 'Build Package'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build Python Package'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+            displayName: 'Set Python Version'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install build wheel twine
+            displayName: 'Install build tools'
+
+          - script: |
+              python -m build
+            displayName: 'Build package'
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: 'dist'
+              artifactName: 'dist'
+            displayName: 'Publish build artifacts'
+
+  - stage: Publish
+    dependsOn: Build
+    displayName: 'Publish Package'
+    jobs:
+      - job: PublishJob
+        displayName: 'Publish to Azure Artifacts'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+            displayName: 'Set Python Version'
+
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'dist'
+              downloadPath: '$(System.DefaultWorkingDirectory)'
+            displayName: 'Download build artifacts'
+
+          - task: TwineAuthenticate@1
+            inputs:
+              artifactFeed: '4DEVOPStamimgolam-hossain/calculator-feed'
+            displayName: 'Authenticate with Azure Artifacts'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install twine
+              python -m twine upload -r "4DEVOPStamimgolam-hossain/calculator-feed" --config-file $(PYPIRC_PATH) $(System.DefaultWorkingDirectory)/dist/*
+            displayName: 'Publish package to Azure Artifacts'
